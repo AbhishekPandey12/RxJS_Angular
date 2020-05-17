@@ -1,5 +1,6 @@
 import { Component, VERSION, OnInit } from '@angular/core';
 import { of, from } from 'rxjs';
+import { map, tap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'my-app',
@@ -18,5 +19,11 @@ export class AppComponent implements OnInit {
       err => console.log(`Got Error`),
       () => console.log(`Complete`)
     )
+
+    of(2, 4, 6).pipe(
+      map(item => item * 2),
+      tap(item => console.log(` My selected item.... ${item}`)),
+      take(2)
+    ).subscribe(console.log)
   }
 }
