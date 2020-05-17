@@ -22,8 +22,14 @@ export class AppComponent implements OnInit {
 
     of(2, 4, 6).pipe(
       map(item => item * 2),
+      map(item => {
+        if(item === 12){
+          throw new Error(`${item} will be processed`);
+        }
+        return item;
+      }),
       tap(item => console.log(` My selected item.... ${item}`)),
-      take(2)
+      take(3)// It will not go to '6' at all.
     ).subscribe(console.log)
   }
 }
